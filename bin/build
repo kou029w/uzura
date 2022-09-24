@@ -1,0 +1,10 @@
+#!/bin/sh
+# ビルド
+# Usage: bin/build
+# Required: rsync
+cd -- "$(dirname -- "$0")/.."
+set -eux
+rm -rf dist
+bin/download dist
+rsync -av src/ dist/
+bin/img-gen dist uzura-amd64.img

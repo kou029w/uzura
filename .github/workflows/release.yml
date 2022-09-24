@@ -1,0 +1,23 @@
+name: release
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Specify version
+        required: true
+jobs:
+  main:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: sudo bin/build
+      - uses: actions/github-script@v6
+        with:
+          script: |
+            const release = require("./.github/scripts/release.cjs");
+            const image = "uzura-amd64.img.gz";
+            const version = process.env.UZURA_VERSION;
+            await release({ image, version, github, context });
+        env:
+          UZURA_VERSION: "${{ github.event.inputs.version }}"

@@ -1,0 +1,11 @@
+#!/bin/sh
+# ベースイメージファイルのダウンロードと展開
+# Usage: bin/download dist
+# Required: xorriso wget
+set -eux
+version=22.04.1
+url="https://releases.ubuntu.com/${version}/ubuntu-${version}-live-server-amd64.iso"
+dist="$1"
+wget "${url}" -O base.iso
+xorriso -indev base.iso -osirrox on -extract / "${dist}"
+rm base.iso

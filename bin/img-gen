@@ -1,0 +1,25 @@
+#!/bin/sh
+# デバイスイメージファイルの生成
+# Usage: bin/img-gen source dist.img
+# Required: fallocate gzip losetup mkfs.fat parted rsync
+set -eux
+size=1.5G
+src="$1"
+image="$2"
+fallocate -l "${size}" "${image}"
+parted --script "${image}" \
+  mklabel gpt \
+  mkpart p1 0 100% \
+  set 1 esp on
+dev="$(losetup -f)"
+finally="losetup -d '${dev}'"
+trap 'sh -c "${finally}"' EXIT
+losetup -P "${dev}" "${image}"
+part="${dev}p1"
+mkfs.fat -n CIDATA "${part}"
+tmp="$(mktemp -d)"
+finally="rmdir '${tmp}'; ${finally}"
+mount "${part}" "${tmp}"
+finally="umount '${tmp}'; ${finally}"
+rsync -rtv "${src}/" "${tmp}/"
+finally="${finally}; gzip -f '${image}'"
