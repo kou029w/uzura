@@ -101,7 +101,7 @@ user-data ファイルの late-commands プロパティに下記のようなコ�
 # user-data
   late-commands:
     - |
-      cat <<EOF | install /dev/stdin /target/etc/rc.local
+      cat <<'EOF' | install /dev/stdin /target/etc/rc.local
       #!/bin/sh
       set -e
       : … ここに初回起動時に実行するコマンドを記述
