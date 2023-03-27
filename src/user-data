@@ -6,10 +6,10 @@ autoinstall:
     hostname: hostname
     username: ubuntu
     # Example password by `openssl passwd -6 ubuntu`
-    password: "$6$iGfCDHv5HM.ATvx2$2jO1Uf1do6mggo5nvbhB4/kEVwV.gAu8yKjGYHjcIHF.NAMFnXjFUtBW0RVPaxIDDe5yfQ4OXlzuwMBcReMAm/"
+    # password: "$6$iGfCDHv5HM.ATvx2$2jO1Uf1do6mggo5nvbhB4/kEVwV.gAu8yKjGYHjcIHF.NAMFnXjFUtBW0RVPaxIDDe5yfQ4OXlzuwMBcReMAm/"
   ssh:
     install-server: true
     allow-pw: false
     authorized-keys:
       # Example public key by `ssh-keygen -t ed25519`
-      - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIG4AR5BAWlw5a9RzyTkYK9ApoTerpNg0qb3kMActUyvN"
+      # - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIG4AR5BAWlw5a9RzyTkYK9ApoTerpNg0qb3kMActUyvN"
