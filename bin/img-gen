@@ -3,7 +3,7 @@
 # Usage: bin/img-gen source dist.img
 # Required: fallocate gzip losetup mkfs.fat parted rsync
 set -eux
-size=1.5G
+size=1.6G
 src="$1"
 image="$2"
 fallocate -l "${size}" "${image}"
