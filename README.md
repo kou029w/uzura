@@ -113,9 +113,10 @@ user-data ファイルの late-commands プロパティに下記のようなコ�
 
 ## 参考文献
 
-[Autoinstall Reference](https://ubuntu.com/server/docs/install/autoinstall-reference)
+- [iPXE - open source boot firmware](https://ipxe.org/)
+- [Autoinstall Reference](https://ubuntu.com/server/docs/install/autoinstall-reference)
 
 ## ライセンス
 
-イメージに含まれているソフトウェアの[ライセンス情報](https://packages.ubuntu.com/)をご参照ください。
+イメージに含まれているソフトウェアの[ライセンス情報](https://ipxe.org/licensing)をご確認ください。
 本リポジトリ内のソフトウェアは CC0-1.0 ライセンスです。

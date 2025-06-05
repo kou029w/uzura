@@ -14,7 +14,7 @@ module.exports = async function ({ image, version, github, context }) {
     ...context.repo,
     release_id: release.id,
   };
-  const name = `uzura-${version}-amd64.img.gz`;
+  const name = `uzura-${version}-amd64.img`;
   const data = await fs.readFile(image);
   await github.rest.repos.uploadReleaseAsset({ ...target, name, data });
   const hash = crypto.createHash("sha256").update(data).digest("hex");

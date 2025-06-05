@@ -1,0 +1,12 @@
+#!ipxe
+set version 24.04.2
+set arch amd64
+set netboot_url http://ftp.udx.icscoe.jp/Linux/ubuntu-releases/${version}/netboot/${arch}
+set iso_url https://ftp.udx.icscoe.jp/Linux/ubuntu-releases/${version}/ubuntu-${version}-live-server-${arch}.iso
+
+echo Autoinstall Ubuntu ${version} Server (${arch})
+
+dhcp
+kernel ${netboot_url}/linux autoinstall ds=nocloud-net ip=dhcp url=${iso_url}
+initrd ${netboot_url}/initrd
+boot

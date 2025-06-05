@@ -1,0 +1,38 @@
+#!/bin/sh
+# ビルド
+# Required: fallocate mkfs.fat rsync wget
+trap 'sh -c "${finally}"' EXIT
+
+download() {
+  url="$1"
+  dest="$2"
+
+  mkdir -p "$(dirname "${dest}")"
+  wget "${url}" -O "${dest}"
+}
+
+build_image() {
+  size=2M
+  src="$1"
+  image="$2"
+
+  fallocate -l "${size}" "${image}"
+  mkfs.fat -n CIDATA "${image}"
+
+  mnt="$(mktemp -d)"
+  finally="rm -rf '${mnt}'; ${finally}"
+
+  mount -o loop,rw "${image}" "${mnt}"
+  finally="umount '${mnt}'; ${finally}"
+
+  rsync -rtv "${src}/" "${mnt}"
+}
+
+set -eux
+
+tmp="$(mktemp -d)"
+finally="rm -rf '${tmp}'"
+
+rsync -rtv src/ "${tmp}"
+download https://boot.ipxe.org/ipxe.efi "${tmp}/EFI/BOOT/BOOTX64.EFI"
+build_image "${tmp}" uzura-amd64.img
