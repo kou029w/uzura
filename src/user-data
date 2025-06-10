@@ -13,3 +13,8 @@ autoinstall:
     authorized-keys:
       # Example public key by `ssh-keygen -t ed25519`
       # - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIG4AR5BAWlw5a9RzyTkYK9ApoTerpNg0qb3kMActUyvN"
+  user-data:
+    runcmd:
+      - - sh
+        - -xc
+        - | # ここに初回起動時に実行するコマンドを記述

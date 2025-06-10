@@ -91,23 +91,18 @@ user-data ファイルの packages プロパティで指定します。
 
 ### 初回起動時に 1 度実行するスクリプト
 
-いくつか方法はありますが、ここでは rc-local.service を使う方法を紹介します。
-user-data ファイルの late-commands プロパティに下記のようなコマンドを追加します。
+user-data ファイルの user-data.runcmd プロパティに下記のようなコマンドを追加します。
 
 例:
 
 <!-- prettier-ignore-start -->
 ```yml
 # user-data
-  late-commands:
-    - |
-      cat <<'EOF' | install /dev/stdin /target/etc/rc.local
-      #!/bin/sh
-      set -e
-      : … ここに初回起動時に実行するコマンドを記述
-      # 次回起動時に実行されないようにするためにコマンドの実行に成功したら自身を削除
-      rm /etc/rc.local
-      EOF
+  user-data:
+    runcmd:
+      - - sh
+        - -xc
+        - | # ここに初回起動時に実行するコマンドを記述
 ```
 <!-- prettier-ignore-end -->
 
