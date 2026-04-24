@@ -1,6 +1,5 @@
 // @ts-check
 const fs = require("node:fs/promises");
-const crypto = require("node:crypto");
 
 /** actions/github-script でのリリース成果物のアップロード */
 module.exports = async function ({ image, version, github, context }) {
@@ -17,12 +16,11 @@ module.exports = async function ({ image, version, github, context }) {
   const name = `uzura-${version}-amd64.img`;
   const data = await fs.readFile(image);
   await github.rest.repos.uploadReleaseAsset({ ...target, name, data });
-  const hash = crypto.createHash("sha256").update(data).digest("hex");
   const body = `${release.body}
 
 ## USB Flash Drive Image
 
-- ${name} (SHA256: \`${hash}\`)
+- ${name}
 `;
   await github.rest.repos.updateRelease({ ...target, body, prerelease: false });
 };
