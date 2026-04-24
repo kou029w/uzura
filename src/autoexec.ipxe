@@ -7,6 +7,6 @@ set iso_url https://ftp.udx.icscoe.jp/Linux/ubuntu-releases/${version}/ubuntu-${
 echo Autoinstall Ubuntu ${version} Server (${arch})
 
 dhcp
-kernel ${netboot_url}/linux autoinstall ds=nocloud-net ip=dhcp url=${iso_url}
+kernel ${netboot_url}/linux autoinstall ds=nocloud ip=dhcp url=${iso_url}
 initrd ${netboot_url}/initrd
 boot
