@@ -34,5 +34,5 @@ tmp="$(mktemp -d)"
 finally="rm -rf '${tmp}'"
 
 rsync -rtv src/ "${tmp}"
-download https://boot.ipxe.org/ipxe.efi "${tmp}/EFI/BOOT/BOOTX64.EFI"
+download https://boot.ipxe.org/x86_64-efi/ipxe.efi "${tmp}/EFI/BOOT/BOOTX64.EFI"
 build_image "${tmp}" uzura-amd64.img
