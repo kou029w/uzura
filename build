@@ -1,5 +1,6 @@
 #!/bin/sh
 # ビルド
+# Usage: build [src-dir] [image]
 # Required: fallocate mkfs.fat rsync wget
 trap 'sh -c "${finally}"' EXIT
 
@@ -33,6 +34,9 @@ set -eux
 tmp="$(mktemp -d)"
 finally="rm -rf '${tmp}'"
 
-rsync -rtv src/ "${tmp}"
+src="${1:-src}"
+image="${2:-uzura-amd64.img}"
+
+rsync -rtv "${src}/" "${tmp}"
 download https://boot.ipxe.org/x86_64-efi/ipxe.efi "${tmp}/EFI/BOOT/BOOTX64.EFI"
-build_image "${tmp}" uzura-amd64.img
+build_image "${tmp}" "${image}"

@@ -1,10 +1,11 @@
 #!ipxe
 set version 26.04
+set release 26.04.1
 set arch amd64
 set netboot_url http://ftp.udx.icscoe.jp/Linux/ubuntu-releases/${version}/netboot/${arch}
-set iso_url https://ftp.udx.icscoe.jp/Linux/ubuntu-releases/${version}/ubuntu-${version}-live-server-${arch}.iso
+set iso_url https://ftp.udx.icscoe.jp/Linux/ubuntu-releases/${version}/ubuntu-${release}-live-server-${arch}.iso
 
-echo Autoinstall Ubuntu ${version} Server (${arch})
+echo Autoinstall Ubuntu ${release} Server (${arch})
 
 dhcp
 kernel ${netboot_url}/linux autoinstall ds=nocloud ip=dhcp url=${iso_url}
